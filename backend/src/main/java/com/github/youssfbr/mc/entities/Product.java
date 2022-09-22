@@ -3,10 +3,12 @@ package com.github.youssfbr.mc.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-public class Category implements Serializable {
+public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -16,14 +18,20 @@ public class Category implements Serializable {
 
     private String name;
 
-    @ManyToMany(mappedBy = "categories")
-    private List<Product> products = new ArrayList<>();
+    private Double price;
 
-    public Category() { }
+    @ManyToMany
+    @JoinTable(name = "product_category",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories = new HashSet<>();
 
-    public Category(Long id, String name) {
+    public Product() { }
+
+    public Product(Long id, String name, Double price) {
         this.id = id;
         this.name = name;
+        this.price = price;
     }
 
     public Long getId() {
@@ -42,22 +50,20 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
+    public Double getPrice() { return price; }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
+    public void setPrice(Double price) { this.price = price; }
+
+    public Set<Category> getCategories() { return categories; }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Category category = (Category) o;
+        Product product = (Product) o;
 
-        return id.equals(category.id);
+        return id.equals(product.id);
     }
 
     @Override

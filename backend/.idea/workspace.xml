@@ -60,6 +60,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\workspace\spring\2022\mc\backend\src\main\resources" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.github.youssfbr.mc.entities" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="McApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
