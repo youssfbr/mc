@@ -1,11 +1,17 @@
 package com.github.youssfbr.mc.entities;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
 public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
+
     private String name;
 
     public Category() { }
