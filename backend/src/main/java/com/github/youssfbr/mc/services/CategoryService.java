@@ -31,4 +31,11 @@ public class CategoryService implements ICategoryService {
                 .findById(categoryId)
                 .orElseThrow (() -> new ResourceNotFoundException("Categoria não encontrada com id " + categoryId));
     }
+
+    @Override
+    @Transactional
+    public Category insertCategory(Category category) {
+        return categoryRepository.save(category);
+    }
+
 }

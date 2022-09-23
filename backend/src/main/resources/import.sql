@@ -1,5 +1,5 @@
-INSERT INTO category (name) VALUES ('Computing');
-INSERT INTO category (name) VALUES ('Office');
+INSERT INTO category (name, created_at) VALUES ('Computing', now());
+INSERT INTO category (name, created_at) VALUES ('Office', now());
 
 INSERT INTO product (name, price) VALUES ('Computer', 2000.0);
 INSERT INTO product (name, price) VALUES ('Printer', 800.0);
