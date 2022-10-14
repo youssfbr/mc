@@ -1,9 +1,7 @@
 package com.github.youssfbr.mc.resources;
 
 import com.github.youssfbr.mc.entities.City;
-import com.github.youssfbr.mc.entities.State;
 import com.github.youssfbr.mc.services.interfaces.ICityService;
-import com.github.youssfbr.mc.services.interfaces.IStateService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

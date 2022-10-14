@@ -1,11 +1,8 @@
 package com.github.youssfbr.mc.services;
 
-import com.github.youssfbr.mc.entities.Category;
 import com.github.youssfbr.mc.entities.City;
-import com.github.youssfbr.mc.repositories.ICategoryRepository;
 import com.github.youssfbr.mc.repositories.ICityRepository;
 import com.github.youssfbr.mc.services.exceptions.ResourceNotFoundException;
-import com.github.youssfbr.mc.services.interfaces.ICategoryService;
 import com.github.youssfbr.mc.services.interfaces.ICityService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

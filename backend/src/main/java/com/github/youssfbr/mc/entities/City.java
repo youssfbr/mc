@@ -18,14 +18,6 @@ public class City implements Serializable {
     @JoinColumn(name = "state_id")
     private State state;
 
-
-//    @ManyToMany
-//    @JsonIgnore
-//    @JoinTable(name = "product_category",
-//            joinColumns = @JoinColumn(name = "product_id"),
-//            inverseJoinColumns = @JoinColumn(name = "category_id"))
-//    private Set<Category> categories = new HashSet<>();
-
     public City() { }
 
     public City(Long id, String name, State state) {
