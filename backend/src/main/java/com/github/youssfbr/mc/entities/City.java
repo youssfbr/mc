@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Table(name = "tb_city")
 public class City implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -60,4 +61,5 @@ public class City implements Serializable {
     public int hashCode() {
         return id.hashCode();
     }
+
 }

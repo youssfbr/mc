@@ -1,5 +1,6 @@
 package com.github.youssfbr.mc.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.youssfbr.mc.entities.enums.ClientType;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
+@Table(name = "tb_client")
 public class Client implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -20,9 +22,23 @@ public class Client implements Serializable {
     private Long id;
 
     private String name;
+
     private String email;
+
     private String cpfOrCnpj;
+
     private Integer clientType;
+
+    @OneToMany(mappedBy = "client")
+    private List<Address> addresses = new ArrayList<>();
+
+    @ElementCollection
+    @CollectionTable(name = "tb_phone")
+    private Set<String> phones = new HashSet<>();
+
+    @OneToMany(mappedBy = "client")
+    @JsonIgnore
+    private List<Order> orders = new ArrayList<>();
 
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant createdAt;
@@ -30,13 +46,6 @@ public class Client implements Serializable {
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant updatedAt;
 
-
-    @OneToMany(mappedBy = "client")
-    private List<Address> addresses = new ArrayList<>();
-
-    @ElementCollection
-    @CollectionTable(name = "phone")
-    private Set<String> phones = new HashSet<>();
 
     public Client() { }
 
@@ -80,12 +89,12 @@ public class Client implements Serializable {
         this.cpfOrCnpj = cpfOrCnpj;
     }
 
-    public ClientType getClientType() throws IllegalAccessException {
-        return ClientType.toEnum(clientType);
+    public Integer getClientType() {
+        return clientType;
     }
 
-    public void setClientType(ClientType clientType) {
-        this.clientType = clientType.getId();
+    public void setClientType(Integer clientType) {
+        this.clientType = clientType;
     }
 
     public List<Address> getAddresses() {
@@ -104,13 +113,9 @@ public class Client implements Serializable {
         this.phones = phones;
     }
 
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
+    public List<Order> getOrders() { return orders; }
 
-    public Instant getUpdatedAt() {
-        return updatedAt;
-    }
+    public void setOrders(List<Order> orders) { this.orders = orders; }
 
     @PrePersist
     public void prePersist() {
@@ -121,6 +126,7 @@ public class Client implements Serializable {
     public void preUpdate() {
         createdAt = Instant.now();
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -136,4 +142,5 @@ public class Client implements Serializable {
     public int hashCode() {
         return id.hashCode();
     }
+
 }
