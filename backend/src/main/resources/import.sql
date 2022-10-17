@@ -40,3 +40,7 @@ INSERT INTO tb_payment (order_id, state_payment) VALUES (2, 1);
 INSERT INTO tb_card_payment (order_id, number_payments) VALUES (1, 6);
 
 INSERT INTO tb_ticket_payment (order_id, expiration_date) VALUES (2, '2017-10-20');
+
+INSERT INTO tb_order_item (discount, price, quantity, product_id, order_id) VALUES (0.00, 2000.0, 1, 1, 1);
+INSERT INTO tb_order_item (discount, price, quantity, product_id, order_id) VALUES (0.00, 80.0, 2, 3, 1);
+INSERT INTO tb_order_item (discount, price, quantity, product_id, order_id) VALUES (100.00, 800.0, 1, 2, 2);

@@ -1,5 +1,7 @@
 package com.github.youssfbr.mc.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
@@ -32,6 +34,7 @@ public class Order implements Serializable {
     private Address deliveryAddress;
 
     @OneToMany(mappedBy = "id.order")
+    @JsonIgnore
     private Set<OrderItem> orderItems = new HashSet<>();
 
     public Order() {
