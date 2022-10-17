@@ -3,6 +3,8 @@ package com.github.youssfbr.mc.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_order")
@@ -28,6 +30,9 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "delivery_address_id")
     private Address deliveryAddress;
+
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> orderItems = new HashSet<>();
 
     public Order() {
     }
@@ -77,6 +82,14 @@ public class Order implements Serializable {
 
     public void setDeliveryAddress(Address deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
+    }
+
+    public Set<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(Set<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 
     @Override
