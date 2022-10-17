@@ -22,8 +22,8 @@ public class Address implements Serializable {
     private String cep;
 
     @ManyToOne
-    @JoinColumn(name = "client_id")
     @JsonIgnore
+    @JoinColumn(name = "client_id")
     private Client client;
 
     @ManyToOne

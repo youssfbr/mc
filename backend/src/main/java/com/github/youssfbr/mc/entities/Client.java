@@ -36,8 +36,8 @@ public class Client implements Serializable {
     @CollectionTable(name = "tb_phone")
     private Set<String> phones = new HashSet<>();
 
-    @OneToMany(mappedBy = "client")
     @JsonIgnore
+    @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
@@ -89,9 +89,7 @@ public class Client implements Serializable {
         this.cpfOrCnpj = cpfOrCnpj;
     }
 
-    public Integer getClientType() {
-        return clientType;
-    }
+    public ClientType getClientType() throws IllegalAccessException { return ClientType.toEnum(clientType); }
 
     public void setClientType(Integer clientType) {
         this.clientType = clientType;
