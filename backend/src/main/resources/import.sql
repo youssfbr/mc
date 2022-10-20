@@ -1,5 +1,10 @@
 INSERT INTO tb_category (name, created_at) VALUES ('Computing', now());
 INSERT INTO tb_category (name, created_at) VALUES ('Office', now());
+INSERT INTO tb_category (name, created_at) VALUES ('Bed & bath', now());
+INSERT INTO tb_category (name, created_at) VALUES ('Eletronics', now());
+INSERT INTO tb_category (name, created_at) VALUES ('Gardening', now());
+INSERT INTO tb_category (name, created_at) VALUES ('Decoration', now());
+INSERT INTO tb_category (name, created_at) VALUES ('Perfumery', now());
 
 INSERT INTO tb_product (name, price) VALUES ('Computer', 2000.0);
 INSERT INTO tb_product (name, price) VALUES ('Printer', 800.0);
