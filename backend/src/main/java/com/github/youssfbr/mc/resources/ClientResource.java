@@ -1,32 +1,62 @@
 package com.github.youssfbr.mc.resources;
 
-import com.github.youssfbr.mc.entities.Client;
+import com.github.youssfbr.mc.dto.request.ClientAllDTO;
+import com.github.youssfbr.mc.dto.request.ClientDTO;
+import com.github.youssfbr.mc.dto.response.MessageResponseDTO;
 import com.github.youssfbr.mc.services.interfaces.IClientService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
 @RequestMapping("/clients")
+@RequiredArgsConstructor
 public class ClientResource {
 
     private final IClientService clientService;
 
-    public ClientResource(IClientService clientService) { this.clientService = clientService; }
+    @GetMapping("/page")
+    public Page<ClientAllDTO> listAllPagesClientes(Pageable pageable) { return clientService.listAllPagesClients(pageable); }
 
     @GetMapping
-    public List<Client> listAllClients() {
-        return clientService.listAllClients();
-    }
+    public List<ClientAllDTO> listAllClients() { return clientService.listAllClients(); }
 
     @GetMapping("{clientId}")
-    public Client listClientById(@PathVariable Long clientId) { return clientService.findClientById(clientId); }
+    public ClientDTO findClientById(@PathVariable Long clientId) throws IllegalAccessException {
+        return clientService.findClientById(clientId);
+    }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Client insertCategory(@RequestBody Client client) {
-        return clientService.insertCategory(client);
+    public ResponseEntity<MessageResponseDTO> createClient(@RequestBody @Valid ClientDTO clientDto) {
+
+        MessageResponseDTO client = clientService.createClient(clientDto);
+
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(client.getId())
+                .toUri();
+
+        return ResponseEntity.created(uri).body(client);
+    }
+
+    @PutMapping("{clientId}")
+    public MessageResponseDTO updateClient(@PathVariable Long clientId, @RequestBody @Valid ClientDTO clientDto) {
+        return clientService.updateClient(clientId, clientDto);
+    }
+
+    @DeleteMapping("{clientId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteClient(@PathVariable Long clientId) {
+        clientService.deleteClient(clientId);
     }
 
 }

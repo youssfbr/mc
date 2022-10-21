@@ -2,31 +2,33 @@ package com.github.youssfbr.mc.resources.exceptions;
 
 import com.github.youssfbr.mc.services.exceptions.DataIntegrityException;
 import com.github.youssfbr.mc.services.exceptions.ResourceNotFoundException;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.Instant;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ValidationMessageError> handleValidationErrors(MethodArgumentNotValidException ex) {
-        BindingResult bindingResult = ex.getBindingResult();
-        List<String> messages = bindingResult.getAllErrors()
-                .stream()
-                .map( DefaultMessageSourceResolvable::getDefaultMessage )
-                .toList();
+    public ResponseEntity<StandardError> validation(MethodArgumentNotValidException e, HttpServletRequest request) {
 
-        return ResponseEntity.badRequest().body(new ValidationMessageError(messages));
+        ValidationError err = new ValidationError(
+                Instant.now(),
+                HttpStatus.BAD_REQUEST.value(),
+                "Erro de validação",
+                "Verifique um ou mais campos e tente novamente",
+                request.getRequestURI());
+
+        for (FieldError x : e.getBindingResult().getFieldErrors()) {
+            err.addError(x.getField(), x.getDefaultMessage());
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)

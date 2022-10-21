@@ -17,7 +17,7 @@ public enum ClientType {
 
     public String getName() { return name; }
 
-    public static ClientType toEnum(Integer id) throws IllegalAccessException {
+    public static ClientType toEnum(Integer id)  {
 
         if (id == null) return null;
 
@@ -26,8 +26,7 @@ public enum ClientType {
                 return x;
             }
         }
-
-        throw new IllegalAccessException("Id inválido: " + id);
+        throw new IllegalArgumentException("Id inválido: " + id);
     }
 
 }

@@ -44,6 +44,7 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public CategoryDTO findCategoryById(Long categoryId) {
         
         Category category = verifyIfExists(categoryId);

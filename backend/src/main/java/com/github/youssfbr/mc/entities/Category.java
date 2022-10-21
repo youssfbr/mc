@@ -1,5 +1,6 @@
 package com.github.youssfbr.mc.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -34,6 +35,7 @@ public class Category implements Serializable {
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant updatedAt;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "categories")
     private final List<Product> products = new ArrayList<>();
 

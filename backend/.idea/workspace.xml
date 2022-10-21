@@ -14,8 +14,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -41,6 +41,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectId" id="2F64gsXGPWOYERVwz0RAkdJEmbp" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -59,17 +62,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.github.youssfbr.mc.dto.request" />
       <recent name="com.github.youssfbr.mc.dto.response" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\workspace\spring\2022\mc\backend\src\main\resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.github.youssfbr.mc.dto.request" />
+      <recent name="com.github.youssfbr.mc.mappers" />
       <recent name="com.github.youssfbr.mc.resources.exceptions" />
       <recent name="com.github.youssfbr.mc.services.exceptions" />
-      <recent name="com.github.youssfbr.mc.dto.request" />
       <recent name="com.github.youssfbr.mc.repositories" />
-      <recent name="com.github.youssfbr.mc.entities" />
     </key>
   </component>
   <component name="RunManager">
