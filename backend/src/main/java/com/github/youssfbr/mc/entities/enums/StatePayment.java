@@ -18,7 +18,7 @@ public enum StatePayment {
 
     public String getName() { return name; }
 
-    public static StatePayment toEnum(Integer id) throws IllegalAccessException {
+    public static StatePayment toEnum(Integer id) {
 
         if (id == null) return null;
 
@@ -28,7 +28,7 @@ public enum StatePayment {
             }
         }
 
-        throw new IllegalAccessException("Id inválido: " + id);
+        throw new IllegalArgumentException("Id inválido: " + id);
     }
 
 }
