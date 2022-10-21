@@ -2,6 +2,7 @@ package com.github.youssfbr.mc.services.interfaces;
 
 import com.github.youssfbr.mc.dto.request.ClientAllDTO;
 import com.github.youssfbr.mc.dto.request.ClientDTO;
+import com.github.youssfbr.mc.dto.request.ClientNewDTO;
 import com.github.youssfbr.mc.dto.response.MessageResponseDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,8 +13,8 @@ public interface IClientService {
 
     Page<ClientAllDTO> listAllPagesClients(Pageable pageable);
     List<ClientAllDTO> listAllClients();
-    ClientDTO findClientById(Long clientId) throws IllegalAccessException;
-    MessageResponseDTO createClient(ClientDTO clientDTO);
+    ClientDTO findClientById(Long clientId);
+    MessageResponseDTO createClient(ClientNewDTO clientNewDTO);
     MessageResponseDTO updateClient(Long clientId, ClientDTO clientDTO);
     void deleteClient(Long clientId);
 

@@ -2,6 +2,7 @@ package com.github.youssfbr.mc.resources;
 
 import com.github.youssfbr.mc.dto.request.ClientAllDTO;
 import com.github.youssfbr.mc.dto.request.ClientDTO;
+import com.github.youssfbr.mc.dto.request.ClientNewDTO;
 import com.github.youssfbr.mc.dto.response.MessageResponseDTO;
 import com.github.youssfbr.mc.services.interfaces.IClientService;
 import lombok.RequiredArgsConstructor;
@@ -30,14 +31,14 @@ public class ClientResource {
     public List<ClientAllDTO> listAllClients() { return clientService.listAllClients(); }
 
     @GetMapping("{clientId}")
-    public ClientDTO findClientById(@PathVariable Long clientId) throws IllegalAccessException {
+    public ClientDTO findClientById(@PathVariable Long clientId) {
         return clientService.findClientById(clientId);
     }
 
     @PostMapping
-    public ResponseEntity<MessageResponseDTO> createClient(@RequestBody @Valid ClientDTO clientDto) {
+    public ResponseEntity<MessageResponseDTO> createClient(@RequestBody @Valid ClientNewDTO clientNewDTO) {
 
-        MessageResponseDTO client = clientService.createClient(clientDto);
+        MessageResponseDTO client = clientService.createClient(clientNewDTO);
 
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()

@@ -61,6 +61,7 @@ public class Client implements Serializable {
         this.email = email;
         this.cpfOrCnpj = cpfOrCnpj;
         setClientType(clientType);
+        //this.clientType = (clientType == null) ? null : clientType.getId();
     }
 
     public ClientType getClientType() {
