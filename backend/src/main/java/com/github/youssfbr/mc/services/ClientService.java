@@ -93,7 +93,7 @@ public class ClientService implements IClientService {
             clientRepository.deleteById(clientId);
         }
         catch (DataIntegrityViolationException e) {
-            throw new DataIntegrityException("Não é possível excluir um cliente que possui pedidos, endereços ou telefones relacionados.");
+            throw new DataIntegrityException("Não é possível excluir porque há pedidos relacionados.");
         }
     }
 
