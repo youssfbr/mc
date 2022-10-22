@@ -1,5 +1,6 @@
 package com.github.youssfbr.mc.dto.request;
 
+import com.github.youssfbr.mc.services.utils.CpfOrCnpj;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +14,7 @@ import java.io.Serializable;
 
 @Data
 @Builder
+@CpfOrCnpj
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClientNewDTO implements Serializable {
@@ -32,15 +34,19 @@ public class ClientNewDTO implements Serializable {
 
     private Integer clientType;
 
-
+    @NotEmpty
     private String patio;
+
+    @NotEmpty
     private String number;
+
     private String complement;
     private String district;
     private String cep;
 
     private Long cityId;
 
+    @NotEmpty
     private String phone1;
     private String phone2;
     private String phone3;
