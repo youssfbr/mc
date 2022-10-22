@@ -22,10 +22,8 @@ public interface ClientMapper {
 
     ClientAllDTO allToDto(Client client);
 
-    default void setStatus(ClientType status) {
-        ClientDTO.builder()
-                .clientType(status.getName())
-                .build();
+    default String setClientType(ClientType status) {
+        return status.getName();
     }
 
 }
