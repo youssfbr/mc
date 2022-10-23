@@ -1,6 +1,6 @@
 package com.github.youssfbr.mc.dto.request;
 
-import com.github.youssfbr.mc.services.utils.CpfOrCnpj;
+import com.github.youssfbr.mc.services.utils.CpfOrCnpjEmail;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +14,7 @@ import java.io.Serializable;
 
 @Data
 @Builder
-@CpfOrCnpj
+@CpfOrCnpjEmail
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClientNewDTO implements Serializable {

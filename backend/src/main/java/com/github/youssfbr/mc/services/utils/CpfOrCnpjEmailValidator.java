@@ -1,20 +1,23 @@
 package com.github.youssfbr.mc.services.utils;
 
 import com.github.youssfbr.mc.dto.request.ClientNewDTO;
+import com.github.youssfbr.mc.entities.Client;
 import com.github.youssfbr.mc.entities.enums.ClientType;
+import com.github.youssfbr.mc.repositories.IClientRepository;
 import com.github.youssfbr.mc.resources.exceptions.FieldMessage;
+import lombok.RequiredArgsConstructor;
 
 import javax.validation.ConstraintValidator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javax.validation.ConstraintValidatorContext;
 
-public class CpfOrCnpjValidator implements ConstraintValidator<CpfOrCnpj, ClientNewDTO> {
+@RequiredArgsConstructor
+public class CpfOrCnpjEmailValidator implements ConstraintValidator<CpfOrCnpjEmail, ClientNewDTO> {
 
-    @Override
-    public void initialize(CpfOrCnpj ann) {
-    }
+    private final IClientRepository clientRepository;
 
     @Override
     public boolean isValid(ClientNewDTO objDto, ConstraintValidatorContext context) {
@@ -22,12 +25,15 @@ public class CpfOrCnpjValidator implements ConstraintValidator<CpfOrCnpj, Client
         List<FieldMessage> list = new ArrayList<>();
 
         if (objDto.getClientType().equals(ClientType.PESSOA_FISICA.getId()) && !BR.isValidCPF(objDto.getCpfOrCnpj())) {
-            list.add(new FieldMessage("cpfOrCnpj", "CPF inválido"));
+            list.add(new FieldMessage("cpfOrCnpj", "CPF inválido."));
         }
 
         if (objDto.getClientType().equals(ClientType.PESSOA_JURIDICA.getId()) && !BR.isValidCNPJ(objDto.getCpfOrCnpj())) {
-            list.add(new FieldMessage("cpfOrCnpj", "CNPJ inválido"));
+            list.add(new FieldMessage("cpfOrCnpj", "CNPJ inválido."));
         }
+
+        Optional<Client> emailExists = clientRepository.findByEmail(objDto.getEmail());
+        if (emailExists.isPresent()) list.add(new FieldMessage("email", "e-mail já existente."));
 
         for (FieldMessage e : list) {
             context.disableDefaultConstraintViolation();

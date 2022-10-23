@@ -18,6 +18,9 @@ public class BR {
     // CNPJ
     private static final int[] weightTin = { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
 
+    private BR() {
+    }
+
     private static int calculate(final String str, final int[] weight) {
         int sum = 0;
         for (int i = str.length() - 1, digit; i >= 0; i--) {

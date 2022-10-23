@@ -22,7 +22,7 @@ public class ResourceExceptionHandler {
                 Instant.now(),
                 HttpStatus.BAD_REQUEST.value(),
                 "Erro de validação",
-                "Verifique um ou mais campos e tente novamente",
+                "Não foi possível cadastrar. Verifique um ou mais campos e tente novamente",
                 request.getRequestURI());
 
         for (FieldError x : e.getBindingResult().getFieldErrors()) {
