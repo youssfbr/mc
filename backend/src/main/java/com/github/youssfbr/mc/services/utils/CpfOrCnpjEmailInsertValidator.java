@@ -1,21 +1,18 @@
 package com.github.youssfbr.mc.services.utils;
 
 import com.github.youssfbr.mc.dto.request.ClientNewDTO;
-import com.github.youssfbr.mc.entities.Client;
 import com.github.youssfbr.mc.entities.enums.ClientType;
 import com.github.youssfbr.mc.repositories.IClientRepository;
 import com.github.youssfbr.mc.resources.exceptions.FieldMessage;
 import lombok.RequiredArgsConstructor;
 
 import javax.validation.ConstraintValidator;
-
+import javax.validation.ConstraintValidatorContext;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import javax.validation.ConstraintValidatorContext;
 
 @RequiredArgsConstructor
-public class CpfOrCnpjEmailValidator implements ConstraintValidator<CpfOrCnpjEmail, ClientNewDTO> {
+public class CpfOrCnpjEmailInsertValidator implements ConstraintValidator<CpfOrCnpjEmailInsert, ClientNewDTO> {
 
     private final IClientRepository clientRepository;
 
@@ -32,8 +29,8 @@ public class CpfOrCnpjEmailValidator implements ConstraintValidator<CpfOrCnpjEma
             list.add(new FieldMessage("cpfOrCnpj", "CNPJ inválido."));
         }
 
-        Optional<Client> emailExists = clientRepository.findByEmail(objDto.getEmail());
-        if (emailExists.isPresent()) list.add(new FieldMessage("email", "e-mail já existente."));
+        boolean emailExists = clientRepository.existsByEmail(objDto.getEmail());
+        if (emailExists) list.add(new FieldMessage("email", "e-mail já existente."));
 
         for (FieldMessage e : list) {
             context.disableDefaultConstraintViolation();

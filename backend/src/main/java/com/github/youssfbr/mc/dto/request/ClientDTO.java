@@ -3,6 +3,7 @@ package com.github.youssfbr.mc.dto.request;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.youssfbr.mc.entities.Address;
 import com.github.youssfbr.mc.entities.Order;
+import com.github.youssfbr.mc.services.utils.EmailUpdate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +22,7 @@ import java.util.Set;
 
 @Data
 @Builder
+@EmailUpdate
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClientDTO implements Serializable {

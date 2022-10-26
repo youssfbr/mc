@@ -15,6 +15,7 @@ import com.github.youssfbr.mc.services.exceptions.DataIntegrityException;
 import com.github.youssfbr.mc.services.exceptions.ResourceNotFoundException;
 import com.github.youssfbr.mc.services.interfaces.IClientService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -54,7 +55,7 @@ public class ClientService implements IClientService {
     @Transactional(readOnly = true)
     public ClientDTO findClientById(Long clientId) {
 
-        Client client = verifyIfExists(clientId);
+        Client client = verifyIfClientExists(clientId);
 
         return clientMapper.toDto(client);
     }
@@ -73,13 +74,14 @@ public class ClientService implements IClientService {
     }
 
     @Override
+    @Transactional
     public MessageResponseDTO updateClient(Long clientId, ClientDTO clientDTO) {
 
-        verifyIfExists(clientId);
+        Client client = verifyIfClientExists(clientId);
 
-        Client clientToUpdate = clientMapper.toModel(clientDTO);
+        BeanUtils.copyProperties(clientDTO, client, "id");
 
-        Client updatedClient = clientRepository.save(clientToUpdate);
+        Client updatedClient = clientRepository.save(client);
 
         return createMessageResponse(updatedClient.getId(), "Cliente atualizado com ID ");
     }
@@ -87,7 +89,7 @@ public class ClientService implements IClientService {
     @Override
     public void deleteClient(Long clientId) {
 
-        verifyIfExists(clientId);
+        verifyIfClientExists(clientId);
 
         try {
             clientRepository.deleteById(clientId);
@@ -97,7 +99,7 @@ public class ClientService implements IClientService {
         }
     }
 
-    private Client verifyIfExists(Long clientId) {
+    public Client verifyIfClientExists(Long clientId) {
         return clientRepository
                 .findById(clientId)
                 .orElseThrow(() -> new ResourceNotFoundException("Cliente com id " + clientId + " não encontrado."));

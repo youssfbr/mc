@@ -13,10 +13,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+
+//@Data
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
+//@AllArgsConstructor
 @Table(name = "tb_client")
 public class Client implements Serializable {
 
@@ -33,7 +36,7 @@ public class Client implements Serializable {
     @Column(unique = true)
     private String email;
 
-    @Column(unique = true)
+    //@Column(unique = true)
     private String cpfOrCnpj;
 
     private Integer clientType;
